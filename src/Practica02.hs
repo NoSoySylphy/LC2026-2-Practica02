@@ -46,7 +46,13 @@ eliminarRepetidos (x:xs) = x : eliminarRepetidos(filter (/= x) xs)
 
 --Ejercicio 2
 interpretacion :: Prop -> Estado -> Bool
-interpretacion = undefined
+interpretacion (Cons x) _ = x
+interpretacion (Var p) est = elem p est
+interpretacion (Not f) est = not (interpretacion f est)
+interpretacion (And f1 f2) est = (interpretacion f1 est) && (interpretacion f2 est)
+interpretacion (Or f1 f2) est = (interpretacion f1 est) || (interpretacion f2 est)
+interpretacion (Impl f1 f2) est = (not (interpretacion f1 est)) || (interpretacion f2 est)
+interpretacion (Syss f1 f2) est = (interpretacion (Impl f1 f2) est) && (interpretacion (Impl f2 f1) est)
 
 --Ejercicio 3
 estadosPosibles :: Prop -> [Estado]
