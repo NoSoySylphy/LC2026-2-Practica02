@@ -31,7 +31,18 @@ type Estado = [String]
 
 --Ejercicio 1
 variables :: Prop -> [String]
-variables = undefined
+variables (Cons _) = []
+variables (Var p) = [p]
+variables (Not f1) = eliminarRepetidos(variables f1)
+variables (And f1 f2) = eliminarRepetidos(variables f1 ++ variables f2)
+variables (Or f1 f2) = eliminarRepetidos(variables f1 ++ variables f2)
+variables (Impl f1 f2) = eliminarRepetidos(variables f1 ++ variables f2)
+variables (Syss f1 f2) = eliminarRepetidos(variables f1 ++ variables f2)
+
+eliminarRepetidos :: [String] -> [String]
+eliminarRepetidos ([]) = []
+eliminarRepetidos (x:xs) = x : eliminarRepetidos(filter (/= x) xs)
+
 
 --Ejercicio 2
 interpretacion :: Prop -> Estado -> Bool
