@@ -90,7 +90,17 @@ contradiccion f = modelos f == []
 
 --Ejercicio 8
 consecuenciaLogica :: [Prop] -> Prop -> Bool
-consecuenciaLogica = undefined
+consecuenciaLogica gamma f =
+    all cumple estados
+  where
+    vars = eliminarRepetidos (concatMap variables (f : gamma))
+    estados = conjPotencia vars
+    
+    cumple est =
+        not (todasVerdaderas est) || interpretacion f est
+    
+    todasVerdaderas est =
+        all (\g -> interpretacion g est) gamma
 
 
 --Funcion auxiliar
