@@ -26,7 +26,7 @@ En esta sección deben eliminar esta línea de texto, borrar la leyenda "Integra
     - No. de Cuenta: 321009078
     - Nombre: Bedoya Tellez Ariadna Valeria
 + Integrante 2
-    - No. de Cuenta: 424107994
+    - No. de Cuenta: 321213554
     - Nombre: Hernandez Guerrero Francisco Javier
 + Integrante 3
     - No. de Cuenta: 424107994

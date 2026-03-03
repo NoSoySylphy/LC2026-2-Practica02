@@ -56,23 +56,37 @@ interpretacion (Syss f1 f2) est = (interpretacion (Impl f1 f2) est) && (interpre
 
 --Ejercicio 3
 estadosPosibles :: Prop -> [Estado]
-estadosPosibles = undefined
+estadosPosibles f = conjPotencia (variables f)
 
 --Ejercicio 4
 modelos :: Prop -> [Estado]
-modelos = undefined
+modelos f = listaModVal f (estadosPosibles f)
+
+listaModVal :: Prop -> [Estado] -> [Estado]
+listaModVal f [] = [] 
+listaModVal f (x:xs) = if interpretacion f x 
+                       then x : listaModVal f xs 
+                       else listaModVal f xs     
+
+{-
+listaModVal :: Prop -> [Estado] -> Bool
+listaModVal f (estadosPosibles f) = if interpretacion prop0 estado == True
+                                    x:(interpretacion xs)
+                                    otherwise
+                                    (interpretacion xs)  
+-}
 
 --Ejercicio 5
 sonEquivalentes :: Prop -> Prop -> Bool
-sonEquivalentes = undefined
+sonEquivalentes f1 f2 = modelos f1 == modelos f2
 
 --Ejercicio 6 
 tautologia :: Prop -> Bool
-tautologia = undefined
+tautologia f = estadosPosibles f == modelos f 
 
 --Ejercicio 7
 contradiccion :: Prop -> Bool
-contradiccion = undefined
+contradiccion f = modelos f == []
 
 --Ejercicio 8
 consecuenciaLogica :: [Prop] -> Prop -> Bool
