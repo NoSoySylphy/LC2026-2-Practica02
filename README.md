@@ -34,4 +34,12 @@ En esta sección deben eliminar esta línea de texto, borrar la leyenda "Integra
 
 ## Comentarios
 
-Recuerden que opcionalmente pueden agregar un comentario (ver los lineamientos de entrega). Si es el caso, borren esta línea y dejen su comentario.
+En las pruebas, en los test estadosPosibles y modelos falla en la formula Cg, aunque devuelve los mismos elementos, en la prueba se considera el orden.
+
+![Resultado al probar la formulaCg con estadosPosibles](src/testEstadosPosibles.png)
+
+El resultado esperado: __[["q","s","p"],["q","s"],["q","p"],["q"],["s","p"],["s"],["p"],[]]__
+
+![Resultado al probar la formulaCg con modelos](src/testModelos.png)
+
+El resultado esperado: __[["q","s","p"],["q","p"],["q"],["s","p"],["s"],["p"],[]]__
