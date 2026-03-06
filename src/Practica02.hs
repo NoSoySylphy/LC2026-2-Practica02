@@ -51,8 +51,8 @@ interpretacion (Var p) est = elem p est
 interpretacion (Not f) est = not (interpretacion f est)
 interpretacion (And f1 f2) est = (interpretacion f1 est) && (interpretacion f2 est)
 interpretacion (Or f1 f2) est = (interpretacion f1 est) || (interpretacion f2 est)
-interpretacion (Impl f1 f2) est = (not (interpretacion f1 est)) || (interpretacion f2 est)
-interpretacion (Syss f1 f2) est = (interpretacion (Impl f1 f2) est) && (interpretacion (Impl f2 f1) est)
+interpretacion (Impl f1 f2) est = interpretacion (Or (Not f1) f2) est
+interpretacion (Syss f1 f2) est = interpretacion (And (Impl f1 f2) (Impl f2 f1)) est
 
 --Ejercicio 3
 estadosPosibles :: Prop -> [Estado]
@@ -65,7 +65,7 @@ modelos f = listaModVal f (estadosPosibles f)
 listaModVal :: Prop -> [Estado] -> [Estado]
 listaModVal f [] = [] 
 listaModVal f (x:xs) = if interpretacion f x 
-                       then x : listaModVal f xs 
+                       then  x : (listaModVal f xs)
                        else listaModVal f xs     
 
 {-
@@ -78,7 +78,7 @@ listaModVal f (estadosPosibles f) = if interpretacion prop0 estado == True
 
 --Ejercicio 5
 sonEquivalentes :: Prop -> Prop -> Bool
-sonEquivalentes f1 f2 = modelos f1 == modelos f2
+sonEquivalentes f1 f2 = tautologia (Syss f1 f2)
 
 --Ejercicio 6 
 tautologia :: Prop -> Bool
